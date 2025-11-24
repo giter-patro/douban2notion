@@ -33,9 +33,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # 👇 这是一个修复步骤，专门解决报错问题的
-      - name: Fix notion-client version
-        run: pip install notion-client==2.2.1
+      # 👇 这里的改动是关键：强制卸载冲突包，清理环境，再安装
+      - name: Force Fix Dependencies
+        run: |
+          pip uninstall -y notion
+          pip uninstall -y notion-client
+          pip install notion-client==2.2.1
 
       - name: douban book sync
         run: |
