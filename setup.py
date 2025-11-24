@@ -1,15 +1,17 @@
 from setuptools import setup, find_packages
 
 setup(
+    name="douban2notion",
     version="0.0.12",
     packages=find_packages(),
     install_requires=[
         "requests",
         "pendulum",
         "retrying",
-        "notion-client",
+        "notion-client==2.2.1",  # 固定版本！
         "github-heatmap",
         "python-dotenv",
+        "beautifulsoup4",
     ],
     entry_points={
         "console_scripts": [
