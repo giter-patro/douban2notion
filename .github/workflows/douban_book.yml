@@ -27,19 +27,26 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: 3.9
+          cache: 'pip'  # 启用pip缓存
+          cache-dependency-path: |
+            requirements.txt
+            setup.py
+          
+      - name: Clear pip cache (if needed)
+        run: |
+          pip cache purge
           
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip uninstall -y douban2notion || true
-          pip install requests
-          pip install "notion-client==2.2.1"
-          pip install github-heatmap
-          pip install retrying
-          pip install pendulum
-          pip install python-dotenv
-          pip install beautifulsoup4
-          pip install -e .
+          pip uninstall -y douban2notion notion-client || true
+          pip install "notion-client==2.2.1" --force-reinstall --no-cache-dir
+          pip install requests github-heatmap retrying pendulum python-dotenv beautifulsoup4
+          pip install -e . --no-deps
+
+      - name: Verify notion-client version
+        run: |
+          python -c "import notion_client; print(f'notion-client version: {notion_client.__version__}')"
 
       - name: douban book sync
         run: |
