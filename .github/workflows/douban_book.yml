@@ -31,8 +31,14 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install -e .
+          pip install requests
+          pip install "notion-client==2.2.1"
+          pip install github-heatmap
+          pip install retrying
+          pip install pendulum
+          pip install python-dotenv
+          pip install beautifulsoup4
+          pip install -e . --no-deps
 
       - name: douban book sync
         run: |
