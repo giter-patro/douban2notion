@@ -4,5 +4,4 @@ github-heatmap
 retrying
 pendulum
 python-dotenv
-douban2notion
 beautifulsoup4
